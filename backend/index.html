@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Processor</title>
+
+    <!-- Linking Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Optional jQuery and Bootstrap JS if needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-5" style="max-width: 90%;">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Your URL</h4>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Enter URL" id="urlInput">
+            </div>
+            <button class="btn btn-primary mb-4" id="urlbutton" onclick="processURL()">Submit</button>
+            
+            <h4>HTML Element</h4>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Enter HTML element" id="elementInput">
+            </div>
+            <button class="btn btn-primary mb-4" id="elementbutton" disabled onclick="processElement()">Submit</button>
+        </div>
+    </div>
+
+    <!-- Display Boxes -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">HTML</div>
+                <pre id="htmlBox" class="card-body" style="white-space: pre-wrap;"></pre>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">Code</div>
+                <pre id="codeBox" class="card-body" style="white-space: pre-wrap;"></pre>
+            </div>
+            <button class="btn btn-primary mb-4" id="runcodebutton" onclick="runCode()" disabled>Run Code</button>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">CSV</div>
+                <pre id="csvBox" class="card-body" style="white-space: pre-wrap;"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="shadow"></div>
+
+<script>
+    // let server_url = "http://127.0.0.1:8000";
+    let server_url = "https://fd9f-84-75-48-252.ngrok-free.app";
+
+    function processURL() {
+        let url = document.getElementById('urlInput').value;
+        let encodedURL = btoa(url); // Encode the URL to base64
+
+        // Making an API request
+        fetch(server_url + `/api/url/${encodedURL}`, {
+                    method: 'GET',
+                    headers: {
+                        'ngrok-skip-browser-warning': 'true'
+                        // 'Origin': window.location.origin,
+                    }
+                })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('htmlBox').textContent = data.html;
+
+                document.getElementById('urlbutton').disabled = true;
+                document.getElementById('elementbutton').disabled = false;
+
+                //attach html to shadow dom
+                let shadowElement = document.getElementById('shadow');
+                let shadowRoot = shadowElement.attachShadow({mode: 'open'});
+                shadowRoot.innerHTML = data.html;
+                window.shadowRoot = shadowRoot;
+            })
+            .catch(err => {
+                alert("There was an error processing the request:", err);
+            });
+    }
+
+    function processElement() {
+        let element = document.getElementById('elementInput').value;
+        console.log("Faran",element)
+        let encodedElement = btoa(element);
+
+        // Making an API request
+        fetch(server_url + `/api/element/${encodedElement}`, {
+                    method: 'GET',
+                    headers: {
+                        'ngrok-skip-browser-warning': 'true'
+                        // 'Origin': window.location.origin,
+                    }
+                })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('codeBox').textContent = data.code;
+                document.getElementById('runcodebutton').disabled = false;
+            })
+            .catch(err => {
+                alert("There was an error processing the request:", err);
+            });
+    }
+
+    function runCode() {
+        var code = document.getElementById('codeBox').textContent;
+        console.log("CCCCC",code)
+        code = code.replace("document.", "window.shadowRoot.");
+        console.log("running code:");
+        console.log("AAAAA",code);
+        eval(code);
+        document.getElementById('csvBox').textContent = window.csv;//this is set by the code that the server returns
+    }
+
+    document.querySelectorAll("#urlInput")[0].value = "https://huggingface.co/TheBloke/stablecode-instruct-alpha-3b-GGML";
+
+</script>
+
+</body>
+</html>
