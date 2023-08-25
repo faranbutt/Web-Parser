@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup, Comment
 
 import base64
 import openai
-openai.api_key = os.environ.get("OPENAI_API_KEY")
+openai.api_key = os.environ.get("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")
 print("key:", openai.api_key)
 
 

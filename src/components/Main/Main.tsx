@@ -24,20 +24,29 @@ export default function Main() {
 
   const ProcessElement = async() => {
     let encodedElement = btoa(tobeParesedContent);
-    const res = await fetch('http://127.0.0.1:8000' + `/api/element/${encodedElement}`, {
-      method: 'GET',
-      headers: {
-          'ngrok-skip-browser-warning': 'true'
-          // 'Origin': window.location.origin,
-      }
-  })
+  //   const res = await fetch('http://127.0.0.1:8000' + `/api/element/${encodedElement}`, {
+  //     method: 'GET',
+  //     headers: {
+  //         'ngrok-skip-browser-warning': 'true'
+  //         // 'Origin': window.location.origin,
+  //     }
+  // })
+  const res = await fetch("https://scraper-tool.osc-fr1.scalingo.io" + `/api/element/${encodedElement}`, {
+    method: 'GET',
+    headers: {
+        // 'ngrok-skip-browser-warning': 'true'
+        'Origin': window.location.origin,
+    }
+})
   const response = await res.json();
-  console.log(response)
+  
   SetParsingCode(response.code);
   }
 
   const RunCode = () => {
-   const csv = eval(ParsingCode);
+  console.log(ParsingCode.toString())
+   const csv =eval(ParsingCode);
+   console.log(csv)
    setcsv(csv);
   }
 
@@ -65,7 +74,7 @@ export default function Main() {
     <div className='flex flex-col justify-center items-center gap-4'>
     <label htmlFor="" className='text-4xl'> Paste Code to Generate Pasing Code</label>   
       <textarea name="postContent" rows={4} cols={40} className='bg-gray-800 text-white' onChange={(e)=>settobeParesedContent(e.target.value)}/>
-      <button className='bg-purple-300 w-32 px-6 py-3 rounded-full' onClick={ProcessElement}>Submit</button>
+      <button className='bg-purple-300 w-32 px-6 py-3 rounded-full' onClick={ProcessElement}>Generate Parsing Code</button>
       <h1 className='text-4xl'>Parsing Code Generated</h1>
       <CopyBlock
       text={ParsingCode}
