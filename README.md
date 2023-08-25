@@ -1,7 +1,7 @@
 <!-- PROJECT TITLE -->
-  <h1 align="center">Web Parser</h1>
+  <h1 align="center">Easy Scrape</h1>
  <h2 2 align="center">
-    Web Parser Tag Line
+    TRANSFORMING DATA EXTRACTION: "A GAME-CHANGING SOLUTION"
     <br />
     </h2>
 
@@ -21,7 +21,7 @@ Web Parser Description
 - [Screenshots](#screenshots)
 - [Technology Stack](#technology-stack)
 - [Features](#features)
-- [Structure](#structure)
+- [Market Value](#market value)
 - [How to use the app](#how-to-use-the-app)
 - [Collaborators](#collaborators)
 - [Hackathon Link](#hackathon-link)
@@ -42,7 +42,7 @@ https://flask-server-0987-5a52a4e45237.herokuapp.com/
 View the Demo [App](https://storage.googleapis.com/lablab-video-submissions/cll22l3qb000035748kv3v7h3/raw/submission-video-x-cll22l3qb000035748kv3v7h3-cllgmqdy2008b356vut6869wr_c4615z9.mp4)
 
 ## Screenshots
-![y1](https://github.com/faranbutt/Eye-blinking-classifier/blob/main/Blue%20Modern%20Medical%20Facebook%20fundraiser%20cover%20photo.png)
+![y1](https://github.com/faranbutt/Web-Parser/blob/main/1.jpg)
 
 ## Technology Stack
 
@@ -60,11 +60,15 @@ View the Demo [App](https://storage.googleapis.com/lablab-video-submissions/cll2
 
 2. Customizable Data Extraction
 
-3. CSV file generation
+3. Element Selection
 
-4. Pagination Support
+4. AI-Enhanced Parsing & Scalability
 
-## Structure
+5. Advanced AI Insights (Permium)
+
+6. Cognitive Search Capabilities (Permium)
+
+## Market Value
 
 ![y2](https://github.com/faranbutt/Eye-blinking-classifier/blob/main/1.jpg)
 
