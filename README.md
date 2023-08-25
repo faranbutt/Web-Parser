@@ -1,5 +1,7 @@
 <!-- PROJECT TITLE -->
-  ![y3](https://github.com/faranbutt/Web-Parser/blob/main/public/1.png)
+  <div>
+ <img src="https://github.com/faranbutt/Web-Parser/blob/main/public/1.png" alt="Girl in a jacket" width="300" height="300"> 
+  </div>
   <h1 align="center">Easy Scrape</h1>
  <h2 2 align="center">
     TRANSFORMING DATA EXTRACTION: "A GAME-CHANGING SOLUTION"
