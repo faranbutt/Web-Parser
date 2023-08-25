@@ -32,6 +32,7 @@ export default function Main() {
       }
   })
   const response = await res.json();
+  console.log(response)
   SetParsingCode(response.code);
   }
 
