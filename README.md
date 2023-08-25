@@ -83,11 +83,11 @@ $ git clone https://github.com/faranbutt/Web-Parser
 
 **Step #2**
 
-- Install dependencies using: `pip install -r server/requirements.txt`
-
 - To start the frontend, run: `npm run dev`
 
-- To start the backend, run: `python server/server.py` or `python3 server/server.py`
+- For Backend, Install dependencies using: `pip install -r Backend/requirements.txt`
+
+- To start the backend, run: `python server/server.py` or `python3 Backend/server/server.py`
 
 - Open  http://localhost:5173/ in your browser and start using
 
@@ -101,6 +101,8 @@ $ git clone https://github.com/faranbutt/Web-Parser
 | Faran Taimoor Butt | https://www.linkedin.com/in/faranbutt/ |
 | Homan | https://www.linkedin.com/in/homan-mirgolbabaee/ |
 | Timothé Laborie  | https://github.com/timothelaborie|
+| Amna Islam | https://github.com/amna-islam-233639116|
+|Zain Ramzan | https://github.com/zain-ramzan|                                      |
 
 ## Hackathon Link
 
