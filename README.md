@@ -21,7 +21,7 @@ Web Parser Description
 - [Screenshots](#screenshots)
 - [Technology Stack](#technology-stack)
 - [Features](#features)
-- [Market Value](#market value)
+- [Market Value](#market-value)
 - [How to use the app](#how-to-use-the-app)
 - [Collaborators](#collaborators)
 - [Hackathon Link](#hackathon-link)
