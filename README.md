@@ -70,7 +70,7 @@ View the Demo [App](https://storage.googleapis.com/lablab-video-submissions/cll2
 
 ## Market Value
 
-![y2](https://github.com/faranbutt/Eye-blinking-classifier/blob/main/1.jpg)
+![y2](https://github.com/faranbutt/Web-Parser/blob/main/2.jpg)
 
 
 ## How to use the app
