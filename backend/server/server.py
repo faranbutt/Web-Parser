@@ -17,6 +17,9 @@ import requests
 from bs4 import BeautifulSoup, Comment
 
 import base64
+import openai
+openai.api_key = os.environ.get("OPENAI_API_KEY")
+print("key:", openai.api_key)
 
 
 def remove_text_from_html(url):
@@ -75,37 +78,54 @@ class GetHTML(Resource):
     
 
 def get_ai_response(prompt):
-    # response = openai.Completion.create(
-    #     engine="text-davinci-003",
-    #     prompt=prompt,
-    #     temperature=0.7,
-    #     max_tokens=256,
-    #     top_p=1,
-    #     frequency_penalty=0,
-    #     presence_penalty=0,
-    # )
-    # return response.choices[0].text
+
+
+    
+
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            # {
+            #     "role": "system",
+            #     "content": "You are a helpful assistant."
+            # },
+            {
+                "role": "user",
+                "content": prompt
+            }
+            ],
+        temperature=0,
+        max_tokens=400,
+        top_p=0.95,
+        stop=[
+            "console.log(csv);"
+        ]
+    )
+
+    code = response.choices[0].message.content
 
     #sample code
-    code = """function extractDataAndConvertToCSV() {
-    // Get all elements with the specified classes
-    const elements = document.querySelectorAll('.ml-auto.font-mono.text-xs');
+#     code = """function extractDataAndConvertToCSV() {
+#     // Get all elements with the specified classes
+#     const elements = document.querySelectorAll('.ml-auto.font-mono.text-xs');
 
-    // Extract text content from each element
-    const data = [];
-    elements.forEach(element => {
-        data.push(`"${element.textContent.trim()}"`);
-    });
+#     // Extract text content from each element
+#     const data = [];
+#     elements.forEach(element => {
+#         data.push(`"${element.textContent.trim()}"`);
+#     });
 
-    // Convert array to CSV
-    const csvString = data.join(',');
-    return csvString;
-}
+#     // Convert array to CSV
+#     const csvString = data.join(',');
+#     return csvString;
+# }
 
-const csv = extractDataAndConvertToCSV();
-console.log(csv);
-window.csv = csv;
-"""
+# const csv = extractDataAndConvertToCSV();
+# console.log(csv);
+# window.csv = csv;
+# """
+
+    
 
     return code
     
@@ -125,9 +145,10 @@ class GetCode(Resource):
 
         print("element:", decoded_string)
 
-        prompt = f"""Write javascript code that accesses the data inside of all elements like this: {decoded_string}
+        prompt = f"""Write javascript code that accesses the data from a web page.
+{decoded_string}
 
-The data should then be arranged into a string that is a valid csv."""
+The data should then be arranged into a string that is a valid csv. Store the csv string into a variable called 'csv', then console.log it. Make sure to put the code in a code block."""
 
         code = get_ai_response(prompt)
 
